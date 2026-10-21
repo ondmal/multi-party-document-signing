@@ -1,2 +1,7 @@
 title: Multi-Party Document Signing Service
 description: Architecture overview — multi-signatory signing over an external platform, Clean Architecture, reliable asynchronous processing on Azure
+defaults:
+  - scope:
+      path: ""
+    values:
+      title: Multi-Party Document Signing Service
