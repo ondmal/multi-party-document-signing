@@ -113,19 +113,19 @@
   <path class="lnE" d="M670 382 V330" marker-end="url(#aMuted)"/>
   <path class="lnO" d="M700 326 V376" marker-end="url(#aAccent)"/>
   <path class="lnE" d="M833 382 V330" marker-end="url(#aMuted)"/>
-  <path class="lnE" d="M980 382 V330" marker-end="url(#aMuted)"/>
-  <path class="lnO" d="M980 246 V194" marker-end="url(#aAccent)"/>
+  <path class="lnE" d="M984 382 V330" marker-end="url(#aMuted)"/>
+  <path class="lnO" d="M984 246 V194" marker-end="url(#aAccent)"/>
 
   <!-- ===== Service lane: creation starts the sessions; reactions in between; outcome at the end ===== -->
   <path class="lnO" d="M306 286 H320" marker-end="url(#aAccent)"/>
-  <path class="lnO" d="M898 286 H904" marker-end="url(#aAccent)"/>
+  <path class="lnO" d="M898 286 H912" marker-end="url(#aAccent)"/>
 
   <!-- ===== Platform lane: the session is the sequential path; a failed session restarts as a new one ===== -->
   <path class="lnE" d="M454 414 H468" marker-end="url(#aMuted)"/>
   <path class="lnE" d="M602 414 H616" marker-end="url(#aMuted)"/>
   <path class="lnE" d="M750 414 H764" marker-end="url(#aMuted)"/>
-  <path class="lnE" d="M898 414 H904" marker-end="url(#aMuted)"/>
-  <path class="lnWarn" d="M980 450 V459 H389 V450" marker-end="url(#aWarn)"/>
+  <path class="lnE" d="M898 414 H912" marker-end="url(#aMuted)"/>
+  <path class="lnWarn" d="M984 450 V459 H389 V450" marker-end="url(#aWarn)"/>
 
   <!-- ===== Consumer lane ===== -->
   <rect class="cardE" x="176" y="126" width="130" height="64" rx="11"/>
@@ -142,9 +142,9 @@
   <g transform="translate(632 162)"><circle class="icW" cx="6" cy="6" r="5.5"/><path class="icW" d="M6 3 V6 L8 7.5"/></g>
   <text class="wait" x="648" y="172">with ID data</text>
 
-  <rect class="cardE" x="908" y="126" width="144" height="64" rx="11"/>
-  <text class="ttl" x="920" y="152">Collect PDFs</text>
-  <text class="sub" x="920" y="172">notified of status</text>
+  <rect class="cardE" x="916" y="126" width="136" height="64" rx="11"/>
+  <text class="ttl" x="928" y="152">Collect PDFs</text>
+  <text class="sub" x="928" y="172">notified of status</text>
 
   <!-- ===== Service lane ===== -->
   <rect class="cardO" x="176" y="246" width="130" height="80" rx="12"/>
@@ -169,15 +169,15 @@
   <text class="subO" x="780" y="296">until collected</text>
 
   <!-- process outcomes -->
-  <rect class="cardOk" x="908" y="246" width="144" height="36" rx="10"/>
-  <path class="icOk" d="M920 264 L925 269 L934 259"/>
-  <text class="okT" x="942" y="262">All sessions</text>
-  <text class="okT" x="942" y="276">completed</text>
+  <rect class="cardOk" x="916" y="246" width="136" height="36" rx="10"/>
+  <path class="icOk" d="M928 264 L933 269 L942 259"/>
+  <text class="okT" x="950" y="262">All sessions</text>
+  <text class="okT" x="950" y="276">completed</text>
 
-  <rect class="cardEnd" x="908" y="290" width="144" height="36" rx="10"/>
-  <path class="icEnd" d="M922 303 L932 313 M932 303 L922 313"/>
-  <text class="endT" x="942" y="306">Process failed</text>
-  <text class="endT" x="942" y="320">no restart</text>
+  <rect class="cardEnd" x="916" y="290" width="136" height="36" rx="10"/>
+  <path class="icEnd" d="M930 303 L940 313 M940 303 L930 313"/>
+  <text class="endT" x="950" y="306">Process failed</text>
+  <text class="endT" x="950" y="320">no restart</text>
 
   <!-- ===== Platform lane ===== -->
   <rect class="cardE" x="324" y="382" width="130" height="64" rx="11"/>
@@ -197,14 +197,15 @@
   <text class="sub" x="780" y="428">by the organisation</text>
 
   <!-- session outcomes -->
-  <rect class="cardOk" x="908" y="382" width="144" height="30" rx="10"/>
-  <path class="icOk" d="M920 397 L925 402 L934 392"/>
-  <text class="okT" x="942" y="401">Session completed</text>
+  <rect class="cardOk" x="916" y="382" width="136" height="32" rx="10"/>
+  <path class="icOk" d="M928 398 L933 403 L942 393"/>
+  <text class="okT" x="950" y="396">Session</text>
+  <text class="okT" x="950" y="410">completed</text>
 
-  <rect class="cardWarn" x="908" y="418" width="144" height="32" rx="10"/>
-  <path class="icWarn" d="M922 434 A5.5 5.5 0 1 1 923.6 437.9 M920.6 435.4 L923.6 437.9 L926.4 435.9"/>
-  <text class="warnT" x="942" y="432">Session failed</text>
-  <text class="warnS" x="942" y="445">restart = new session</text>
+  <rect class="cardWarn" x="916" y="418" width="136" height="32" rx="10"/>
+  <path class="icWarn" d="M930 434 A5.5 5.5 0 1 1 931.6 437.9 M928.6 435.4 L931.6 437.9 L934.4 435.9"/>
+  <text class="warnT" x="950" y="432">Session failed</text>
+  <text class="warnS" x="950" y="445">restart = new one</text>
 
   <!-- per-signatory brace -->
   <path class="brace" d="M324 480 V488 H1052 V480"/>
