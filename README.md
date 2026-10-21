@@ -72,7 +72,7 @@ webhook; invitations go out by e-mail through a notification service.
 | Hosting / runtime | Azure; Kubernetes (all workloads containerised via one Helm chart) |
 | Async & messaging | Azure Functions worker (queue- & timer-triggered) on Azure Storage Queues; transactional outbox |
 | Integration | REST adapters with centralised resiliency (timeouts, retries, circuit breakers); webhooks in, callbacks out |
-| Security | OAuth / OpenID Connect with role-based access, enforced at the API gateway; workload identity to Azure resources; webhooks protected by IP allow-listing, HMAC signatures and Basic auth |
+| Security | OAuth / OpenID Connect with role-based access, enforced at the API gateway; workload identity to Azure resources; webhooks protected by IP allow-listing at the external gateway, HMAC signatures and Basic auth |
 | Observability | OpenTelemetry (traces, metrics, logs) exported to Honeycomb; dashboards & SLOs as code |
 | Testing | Unit and integration tests (containerised PostgreSQL and storage, mocked external systems) |
 
@@ -182,10 +182,10 @@ state and creates the missing steps itself. A late webhook arriving after a
 recovery is recognised as a duplicate and ignored.
 
 **A separate internet-facing webhook receiver.** Only a small receiver host is
-exposed to the internet, behind the external gateway. It verifies the caller —
-IP allow-listing, an HMAC signature, Basic auth — translates the webhook,
-forwards it to the service over the internal gateway under its own identity,
-and answers at once. The service itself stays internal. The cost: one more
+exposed to the internet, behind the external gateway, which admits only the
+platform's IP addresses. The receiver verifies the caller — an HMAC signature,
+Basic auth — translates the webhook, forwards it to the service over the
+internal gateway under its own identity, and answers at once. The service itself stays internal. The cost: one more
 deployable and one more hop.
 
 ### Mechanics
