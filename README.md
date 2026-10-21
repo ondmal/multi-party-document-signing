@@ -163,10 +163,13 @@ waiting for the answer into two messages, a correlation and a timeout — more t
 fail, for no gain. A slow consumer is retried within a short budget and the step
 replayed; but a signatory will not wait more than a minute or two, so
 availability at these two points is the consumer's responsibility — the session
-then expires on the platform and can be restarted. Status changes reach the consumer through the same callback
-channel. The cost: there is no business-event stream, so auditing, reporting or
-other observers cannot subscribe to the signing lifecycle — events would
-complement the callbacks, not replace them.
+then expires on the platform and can be restarted. Every status change reaches
+the consumer through the same callback channel, so the consumer sees the whole
+signing lifecycle and can publish it onwards. What is missing is a stream
+published by the service itself, for auditing, reporting or other observers
+that are not its consumers; no requirement asked for one. Closing the gap is
+cheap — the same outbox that carries the callbacks can carry events — and
+events would complement the callbacks, not replace them.
 
 **Webhooks, with a recovery check behind them.** The platform reports progress
 by webhook, and webhook delivery is not guaranteed. Polling alone would add
