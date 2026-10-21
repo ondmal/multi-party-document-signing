@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 480" width="1100" height="480" role="img" aria-labelledby="title desc">
+  <title id="title">Life of a command</title>
+  <desc id="desc">One command end to end: the state change and its commands are committed in one database transaction to the outbox in PostgreSQL; right after commit the command is published to a Storage Queue with durable, at-least-once delivery; the Azure Functions worker executes it serialised per signing process with an idempotent handler; the handler calls the signing platform or a consuming service; the platform later reports progress by webhook, which the receiver turns into the next command. Safety nets: a timer-driven outbox publisher re-publishes what the first publish missed; failed, conflicting or early commands are replayed with backoff; a deferred recovery check asks the platform when a webhook is overdue; a lifecycle timer ends any process after five days. Messages past their time-to-live are dead-lettered as data-loss events.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2f4f8"/>
+      <stop offset="1" stop-color="#e6eaf1"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4f6bff" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#4f6bff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ours" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5f7ff"/>
+      <stop offset="1" stop-color="#eaefff"/>
+    </linearGradient>
+    <linearGradient id="oursStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4f6bff"/>
+      <stop offset="1" stop-color="#9b5cff"/>
+    </linearGradient>
+    <linearGradient id="num" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b74ff"/>
+      <stop offset="1" stop-color="#9259ff"/>
+    </linearGradient>
+    <linearGradient id="ext" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#fbfcfe"/>
+    </linearGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#0f172a" fill-opacity="0.08"/>
+    </pattern>
+    <filter id="shadow" x="-10%" y="-25%" width="120%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#1e293b" flood-opacity="0.08"/>
+    </filter>
+    <marker id="aAccent" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6d84ff"/>
+    </marker>
+    <marker id="aSafe" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/>
+    </marker>
+    <marker id="aDead" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e5484d"/>
+    </marker>
+    <style>
+      text { font-family: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+      .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2.2px; fill: #4f6bff; }
+      .eyebrowS{ font-size: 10.5px; font-weight: 700; letter-spacing: 1.8px; fill: #7c8aa5; }
+      .h1      { font-size: 21px; font-weight: 600; fill: #0f172a; }
+      .lead    { font-size: 12.5px; fill: #64748b; }
+      .ttl     { font-size: 14px; font-weight: 600; fill: #111827; }
+      .sub     { font-size: 11.5px; fill: #64748b; }
+      .subO    { font-size: 11.5px; fill: #4a58b8; }
+      .pill    { font-size: 11px; fill: #475569; }
+      .legend  { font-size: 11.5px; fill: #64748b; }
+      .numT    { font-size: 11px; font-weight: 700; fill: #ffffff; }
+      .whereT  { font-size: 10.5px; font-weight: 600; fill: #3546b3; }
+      .whereET { font-size: 10.5px; font-weight: 600; fill: #475569; }
+      .badgeT  { font-size: 10px; font-weight: 600; fill: #15803d; }
+      .cardO   { fill: url(#ours); stroke: url(#oursStroke); stroke-width: 1.5; filter: url(#shadow); }
+      .cardE   { fill: url(#ext); stroke: #cfd6e3; stroke-width: 1.2; filter: url(#shadow); }
+      .cardS   { fill: #ffffff; stroke: #4ade80; stroke-width: 1.4; stroke-dasharray: 6 4; filter: url(#shadow); }
+      .cardD   { fill: #ffffff; stroke: #f59ea0; stroke-width: 1.4; stroke-dasharray: 6 4; filter: url(#shadow); }
+      .where   { fill: #4f6bff; fill-opacity: 0.08; stroke: #4f6bff; stroke-opacity: 0.35; stroke-width: 1; }
+      .whereE  { fill: #0f172a; fill-opacity: 0.04; stroke: #cfd6e3; stroke-width: 1; }
+      .tileS   { fill: #16a34a; fill-opacity: 0.10; }
+      .tileD   { fill: #e5484d; fill-opacity: 0.10; }
+      .icS     { fill: none; stroke: #16a34a; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .icD     { fill: none; stroke: #e5484d; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .lnO     { fill: none; stroke: #6d84ff; stroke-width: 1.8; }
+      .lnLoop  { fill: none; stroke: #9aa9ff; stroke-width: 1.4; stroke-dasharray: 2 4; stroke-linecap: round; }
+      .lnS     { fill: none; stroke: #22a55a; stroke-width: 1.6; stroke-dasharray: 5 4; }
+      .lnD     { fill: none; stroke: #e5484d; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .pillBg  { fill: #ffffff; stroke: #d6dce8; stroke-width: 1; }
+      .badge   { fill: #16a34a; fill-opacity: 0.10; stroke: #16a34a; stroke-opacity: 0.35; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1100" height="480" rx="22" fill="url(#bg)"/>
+  <rect width="1100" height="480" rx="22" fill="url(#dots)"/>
+  <ellipse cx="550" cy="220" rx="480" ry="180" fill="url(#halo)"/>
+
+  <!-- Header -->
+  <text class="eyebrow" x="44" y="44">BACKGROUND COMMAND</text>
+  <text class="h1" x="44" y="72">The life of one command: nothing lost, nothing stuck</text>
+  <text class="lead" x="44" y="96">The same path for every step after a process is created.</text>
+  <circle cx="702" cy="52" r="5" fill="url(#oursStroke)"/>
+  <text class="legend" x="714" y="56">this system</text>
+  <circle cx="800" cy="52" r="5" fill="#c3ccdb"/>
+  <text class="legend" x="812" y="56">external</text>
+  <circle cx="880" cy="52" r="5" fill="#22a55a"/>
+  <text class="legend" x="892" y="56">safety nets</text>
+  <circle cx="976" cy="52" r="5" fill="#e5484d"/>
+  <text class="legend" x="988" y="56">dead-letter</text>
+
+  <!-- Loop: webhook becomes the next command -->
+  <path class="lnLoop" d="M954 144 V122 H146 V140" marker-end="url(#aAccent)"/>
+  <rect class="pillBg" x="460" y="111" width="180" height="22" rx="11"/>
+  <text class="pill" x="550" y="126" text-anchor="middle">each webhook starts the next step</text>
+
+  <!-- Happy path -->
+  <path class="lnO" d="M236 205 H254" marker-end="url(#aAccent)"/>
+  <path class="lnO" d="M438 205 H456" marker-end="url(#aAccent)"/>
+  <path class="lnO" d="M640 205 H658" marker-end="url(#aAccent)"/>
+  <path class="lnO" d="M842 205 H860" marker-end="url(#aAccent)"/>
+
+  <!-- 1 Commit -->
+  <rect class="cardO" x="56" y="144" width="180" height="122" rx="12"/>
+  <circle cx="80" cy="168" r="11" fill="url(#num)"/>
+  <text class="numT" x="80" y="172" text-anchor="middle">1</text>
+  <text class="ttl" x="100" y="173">Commit</text>
+  <text class="subO" x="72" y="198">state change + commands</text>
+  <text class="sub" x="72" y="215">one database transaction</text>
+  <rect class="where" x="72" y="232" width="124" height="20" rx="10"/>
+  <text class="whereT" x="134" y="246" text-anchor="middle">PostgreSQL · outbox</text>
+
+  <!-- 2 Publish -->
+  <rect class="cardO" x="258" y="144" width="180" height="122" rx="12"/>
+  <circle cx="282" cy="168" r="11" fill="url(#num)"/>
+  <text class="numT" x="282" y="172" text-anchor="middle">2</text>
+  <text class="ttl" x="302" y="173">Publish</text>
+  <text class="subO" x="274" y="198">right after the commit</text>
+  <text class="sub" x="274" y="215">durable, at-least-once</text>
+  <rect class="where" x="274" y="232" width="96" height="20" rx="10"/>
+  <text class="whereT" x="322" y="246" text-anchor="middle">Storage Queue</text>
+
+  <!-- 3 Execute -->
+  <rect class="cardO" x="460" y="144" width="180" height="122" rx="12"/>
+  <circle cx="484" cy="168" r="11" fill="url(#num)"/>
+  <text class="numT" x="484" y="172" text-anchor="middle">3</text>
+  <text class="ttl" x="504" y="173">Execute</text>
+  <text class="subO" x="476" y="198">serialised per process,</text>
+  <text class="sub" x="476" y="215">idempotent handler</text>
+  <rect class="where" x="476" y="232" width="108" height="20" rx="10"/>
+  <text class="whereT" x="530" y="246" text-anchor="middle">Azure Functions</text>
+
+  <!-- 4 External call -->
+  <rect class="cardE" x="662" y="144" width="180" height="122" rx="12"/>
+  <circle cx="686" cy="168" r="11" fill="#a7b2c6"/>
+  <text class="numT" x="686" y="172" text-anchor="middle">4</text>
+  <text class="ttl" x="706" y="173">External call</text>
+  <text class="sub" x="678" y="198">signing platform</text>
+  <text class="sub" x="678" y="215">or a consuming service</text>
+  <rect class="whereE" x="678" y="232" width="118" height="20" rx="10"/>
+  <text class="whereET" x="737" y="246" text-anchor="middle">resilient adapters</text>
+
+  <!-- 5 Webhook -->
+  <rect class="cardO" x="864" y="144" width="180" height="122" rx="12"/>
+  <circle cx="888" cy="168" r="11" fill="url(#num)"/>
+  <text class="numT" x="888" y="172" text-anchor="middle">5</text>
+  <text class="ttl" x="908" y="173">Webhook</text>
+  <text class="subO" x="880" y="198">platform reports later;</text>
+  <text class="sub" x="880" y="215">accepted, queued as a step</text>
+  <rect class="where" x="880" y="232" width="112" height="20" rx="10"/>
+  <text class="whereT" x="936" y="246" text-anchor="middle">webhook receiver</text>
+
+  <!-- Safety-net and dead-letter connectors -->
+  <path class="lnD" d="M146 266 V356" marker-end="url(#aDead)"/>
+  <rect class="pillBg" x="114" y="299" width="64" height="22" rx="11"/>
+  <text class="pill" x="146" y="314" text-anchor="middle">expired</text>
+  <path class="lnS" d="M348 360 V270" marker-end="url(#aSafe)"/>
+  <path class="lnS" d="M550 360 V270" marker-end="url(#aSafe)"/>
+  <path class="lnS" d="M752 360 V270" marker-end="url(#aSafe)"/>
+
+  <text class="eyebrowS" x="258" y="348">SAFETY NETS</text>
+
+  <!-- Dead-letter -->
+  <rect class="cardD" x="56" y="360" width="180" height="88" rx="12"/>
+  <rect class="tileD" x="70" y="374" width="30" height="30" rx="8"/>
+  <g transform="translate(77 381)">
+    <circle class="icD" cx="8" cy="8" r="6.5"/>
+    <path class="icD" d="M3.5 3.5 L12.5 12.5"/>
+  </g>
+  <text class="ttl" x="110" y="394">Dead-letter</text>
+  <text class="sub" x="70" y="422">past its time-to-live:</text>
+  <text class="sub" x="70" y="437">flagged as data loss</text>
+
+  <!-- Outbox publisher -->
+  <rect class="cardS" x="258" y="360" width="180" height="88" rx="12"/>
+  <rect class="tileS" x="272" y="374" width="30" height="30" rx="8"/>
+  <g transform="translate(279 381)">
+    <path class="icS" d="M14 8 A6 6 0 1 1 11.5 3.2 M14 1.5 V5 H10.5"/>
+  </g>
+  <text class="ttl" x="312" y="394">Publisher</text>
+  <rect class="badge" x="384" y="382" width="40" height="17" rx="8.5"/>
+  <text class="badgeT" x="404" y="394" text-anchor="middle">timer</text>
+  <text class="sub" x="272" y="422">re-publishes anything</text>
+  <text class="sub" x="272" y="437">the first publish missed</text>
+
+  <!-- Replay -->
+  <rect class="cardS" x="460" y="360" width="180" height="88" rx="12"/>
+  <rect class="tileS" x="474" y="374" width="30" height="30" rx="8"/>
+  <g transform="translate(481 381)">
+    <path class="icS" d="M2 8 A6 6 0 1 0 4.5 3.2 M2 1.5 V5 H5.5"/>
+  </g>
+  <text class="ttl" x="514" y="394">Replay</text>
+  <text class="sub" x="474" y="422">failures, conflicts, early</text>
+  <text class="sub" x="474" y="437">steps: backoff via outbox</text>
+
+  <!-- Recovery check -->
+  <rect class="cardS" x="662" y="360" width="180" height="88" rx="12"/>
+  <rect class="tileS" x="676" y="374" width="30" height="30" rx="8"/>
+  <g transform="translate(683 381)">
+    <circle class="icS" cx="7" cy="7" r="5"/>
+    <path class="icS" d="M10.8 10.8 L14.5 14.5"/>
+  </g>
+  <text class="ttl" x="716" y="394">Recovery check</text>
+  <text class="sub" x="676" y="422">asks the platform when</text>
+  <text class="sub" x="676" y="437">a webhook is overdue</text>
+
+  <!-- Lifecycle -->
+  <rect class="cardS" x="864" y="360" width="180" height="88" rx="12"/>
+  <rect class="tileS" x="878" y="374" width="30" height="30" rx="8"/>
+  <g transform="translate(885 381)">
+    <circle class="icS" cx="8" cy="8" r="6.5"/>
+    <path class="icS" d="M8 4 V8 L10.8 9.8"/>
+  </g>
+  <text class="ttl" x="918" y="394">Lifecycle</text>
+  <rect class="badge" x="986" y="382" width="40" height="17" rx="8.5"/>
+  <text class="badgeT" x="1006" y="394" text-anchor="middle">timer</text>
+  <text class="sub" x="878" y="422">ends any process after</text>
+  <text class="sub" x="878" y="437">five days; never stuck</text>
+</svg>

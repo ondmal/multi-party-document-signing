@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" width="1100" height="600" role="img" aria-labelledby="title desc">
+  <title id="title">Signing process</title>
+  <desc id="desc">Three lanes: consuming service, signing service, signing platform. The consumer creates a process and gets its id. The service starts one session per signatory on the platform, which sends the invitation. The signatory verifies their ID on the platform; the service asks the consumer whether the identity matches while the signatory waits, then asks the consumer for the documents, also while the signatory waits, and sends them to the platform. The signatory reviews and signs, the platform adds the organisation's counter-signature, and the service keeps the signed documents. The process completes only when every signatory has signed and fails as a whole otherwise; the consumer is notified and collects the documents.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2f4f8"/>
+      <stop offset="1" stop-color="#e6eaf1"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4f6bff" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#4f6bff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ours" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5f7ff"/>
+      <stop offset="1" stop-color="#eaefff"/>
+    </linearGradient>
+    <linearGradient id="oursStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4f6bff"/>
+      <stop offset="1" stop-color="#9b5cff"/>
+    </linearGradient>
+    <linearGradient id="ext" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#fbfcfe"/>
+    </linearGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#0f172a" fill-opacity="0.08"/>
+    </pattern>
+    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <filter id="shadow" x="-10%" y="-25%" width="120%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#1e293b" flood-opacity="0.08"/>
+    </filter>
+    <marker id="aAccent" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6d84ff"/>
+    </marker>
+    <marker id="aMuted" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a7b2c6"/>
+    </marker>
+    <style>
+      text { font-family: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+      .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2.2px; fill: #4f6bff; }
+      .phase   { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; fill: #3546b3; }
+      .phaseE  { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; fill: #64748b; }
+      .h1      { font-size: 21px; font-weight: 600; fill: #0f172a; }
+      .ttl     { font-size: 13px; font-weight: 600; fill: #111827; }
+      .sub     { font-size: 11px; fill: #64748b; }
+      .subO    { font-size: 11px; fill: #4a58b8; }
+      .wait    { font-size: 11px; font-weight: 600; fill: #b45309; }
+      .note    { font-size: 12px; fill: #475569; }
+      .noteB   { font-size: 12px; font-weight: 600; fill: #0f172a; }
+      .legend  { font-size: 11.5px; fill: #64748b; }
+      .okT     { font-size: 12.5px; font-weight: 600; fill: #15803d; }
+      .endT    { font-size: 12.5px; font-weight: 600; fill: #b42318; }
+      .panel   { fill: #ffffff; fill-opacity: 0.5; stroke: #dfe4ef; stroke-width: 1; }
+      .panelO  { fill: #4f6bff; fill-opacity: 0.04; stroke: #c3cdfa; stroke-width: 1; }
+      .cardO   { fill: url(#ours); stroke: url(#oursStroke); stroke-width: 1.5; filter: url(#shadow); }
+      .cardE   { fill: url(#ext); stroke: #cfd6e3; stroke-width: 1.2; filter: url(#shadow); }
+      .cardOk  { fill: #f0fdf4; stroke: #4ade80; stroke-width: 1.4; filter: url(#shadow); }
+      .cardEnd { fill: #fef3f2; stroke: #f59ea0; stroke-width: 1.4; filter: url(#shadow); }
+      .icOk    { fill: none; stroke: #16a34a; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+      .icEnd   { fill: none; stroke: #e5484d; stroke-width: 1.8; stroke-linecap: round; }
+      .icW     { fill: none; stroke: #d97706; stroke-width: 1.5; stroke-linecap: round; }
+      .lnO     { fill: none; stroke: #6d84ff; stroke-width: 1.8; }
+      .lnE     { fill: none; stroke: #a7b2c6; stroke-width: 1.5; }
+      .brace   { fill: none; stroke: #9aa9ff; stroke-width: 1.4; }
+    </style>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1100" height="600" rx="22" fill="url(#bg)"/>
+  <rect width="1100" height="600" rx="22" fill="url(#dots)"/>
+  <ellipse cx="600" cy="290" rx="480" ry="200" fill="url(#halo)"/>
+
+  <!-- Header -->
+  <text class="eyebrow" x="44" y="44">SIGNING PROCESS · LOGICAL FLOW</text>
+  <text class="h1" x="44" y="72">One process, a session per signatory, all or nothing</text>
+  <circle cx="770" cy="52" r="5" fill="url(#oursStroke)"/>
+  <text class="legend" x="782" y="56">this system</text>
+  <circle cx="868" cy="52" r="5" fill="#c3ccdb"/>
+  <text class="legend" x="880" y="56">external</text>
+  <g transform="translate(944 45)"><circle class="icW" cx="6" cy="7" r="5.5"/><path class="icW" d="M6 4 V7 L8 8.5"/></g>
+  <text class="legend" x="962" y="56">signatory waits</text>
+
+  <!-- Lanes -->
+  <rect class="panel" x="40" y="104" width="1020" height="108" rx="14"/>
+  <text class="phaseE" x="58" y="152">CONSUMING</text>
+  <text class="phaseE" x="58" y="168">SERVICE</text>
+
+  <rect class="panelO" x="40" y="226" width="1020" height="120" rx="14"/>
+  <text class="phase" x="58" y="282">SIGNING</text>
+  <text class="phase" x="58" y="298">SERVICE</text>
+
+  <rect class="panel" x="40" y="360" width="1020" height="108" rx="14"/>
+  <text class="phaseE" x="58" y="408">SIGNING</text>
+  <text class="phaseE" x="58" y="424">PLATFORM</text>
+
+  <!-- ===== Vertical connectors (under cards) ===== -->
+  <path class="lnE" d="M241 190 V242" marker-end="url(#aMuted)"/>
+  <path class="lnO" d="M389 326 V376" marker-end="url(#aAccent)"/>
+  <path class="lnE" d="M522 382 V330" marker-end="url(#aMuted)"/>
+  <path class="lnO" d="M552 326 V376" marker-end="url(#aAccent)"/>
+  <path class="lnO" d="M537 246 V194" marker-start="url(#aAccent)" marker-end="url(#aAccent)"/>
+  <path class="lnO" d="M685 246 V194" marker-start="url(#aAccent)" marker-end="url(#aAccent)"/>
+  <path class="lnE" d="M670 382 V330" marker-end="url(#aMuted)"/>
+  <path class="lnO" d="M700 326 V376" marker-end="url(#aAccent)"/>
+  <path class="lnE" d="M833 382 V330" marker-end="url(#aMuted)"/>
+  <path class="lnO" d="M981 246 V194" marker-end="url(#aAccent)"/>
+
+  <!-- ===== Service lane: creation starts the sessions; reactions in between; outcome at the end ===== -->
+  <path class="lnO" d="M306 286 H320" marker-end="url(#aAccent)"/>
+  <path class="lnO" d="M898 286 H912" marker-end="url(#aAccent)"/>
+
+  <!-- ===== Platform lane: the session is the sequential path ===== -->
+  <path class="lnE" d="M454 414 H468" marker-end="url(#aMuted)"/>
+  <path class="lnE" d="M602 414 H616" marker-end="url(#aMuted)"/>
+  <path class="lnE" d="M750 414 H764" marker-end="url(#aMuted)"/>
+
+  <!-- ===== Consumer lane ===== -->
+  <rect class="cardE" x="176" y="126" width="130" height="64" rx="11"/>
+  <text class="ttl" x="188" y="152">Create process</text>
+  <text class="sub" x="188" y="172">signatories · docs</text>
+
+  <rect class="cardE" x="472" y="126" width="130" height="64" rx="11"/>
+  <text class="ttl" x="484" y="152">Identity match?</text>
+  <g transform="translate(484 162)"><circle class="icW" cx="6" cy="6" r="5.5"/><path class="icW" d="M6 3 V6 L8 7.5"/></g>
+  <text class="wait" x="500" y="172">consumer decides</text>
+
+  <rect class="cardE" x="620" y="126" width="130" height="64" rx="11"/>
+  <text class="ttl" x="632" y="152">Prepare docs</text>
+  <g transform="translate(632 162)"><circle class="icW" cx="6" cy="6" r="5.5"/><path class="icW" d="M6 3 V6 L8 7.5"/></g>
+  <text class="wait" x="648" y="172">with ID data</text>
+
+  <rect class="cardE" x="916" y="126" width="130" height="64" rx="11"/>
+  <text class="ttl" x="928" y="152">Collect PDFs</text>
+  <text class="sub" x="928" y="172">notified of status</text>
+
+  <!-- ===== Service lane ===== -->
+  <rect class="cardO" x="176" y="246" width="130" height="80" rx="12"/>
+  <text class="ttl" x="188" y="276">Process created</text>
+  <text class="subO" x="188" y="296">id returned at once</text>
+
+  <rect class="glowO" x="324" y="246" width="130" height="80" rx="12" filter="url(#glow)" style="fill:none;stroke:#6d8dff;stroke-width:6;stroke-opacity:0.2"/>
+  <rect class="cardO" x="324" y="246" width="130" height="80" rx="12"/>
+  <text class="ttl" x="336" y="276">Start sessions</text>
+  <text class="subO" x="336" y="296">one per signatory</text>
+
+  <rect class="cardO" x="472" y="246" width="130" height="80" rx="12"/>
+  <text class="ttl" x="484" y="276">Confirm identity</text>
+  <text class="subO" x="484" y="296">verdict to platform</text>
+
+  <rect class="cardO" x="620" y="246" width="130" height="80" rx="12"/>
+  <text class="ttl" x="632" y="276">Send documents</text>
+  <text class="subO" x="632" y="296">integrity-checked</text>
+
+  <rect class="cardO" x="768" y="246" width="130" height="80" rx="12"/>
+  <text class="ttl" x="780" y="276">Keep signed PDFs</text>
+  <text class="subO" x="780" y="296">until collected</text>
+
+  <!-- outcome -->
+  <rect class="cardOk" x="916" y="246" width="130" height="36" rx="10"/>
+  <path class="icOk" d="M928 264 L933 269 L942 259"/>
+  <text class="okT" x="950" y="269">Completed</text>
+  <rect class="cardEnd" x="916" y="290" width="130" height="36" rx="10"/>
+  <path class="icEnd" d="M929 303 L939 313 M939 303 L929 313"/>
+  <text class="endT" x="950" y="313">Failed</text>
+
+  <!-- ===== Platform lane ===== -->
+  <rect class="cardE" x="324" y="382" width="130" height="64" rx="11"/>
+  <text class="ttl" x="336" y="408">Session opened</text>
+  <text class="sub" x="336" y="428">invitation e-mail</text>
+
+  <rect class="cardE" x="472" y="382" width="130" height="64" rx="11"/>
+  <text class="ttl" x="484" y="408">Verify ID</text>
+  <text class="sub" x="484" y="428">document + face</text>
+
+  <rect class="cardE" x="620" y="382" width="130" height="64" rx="11"/>
+  <text class="ttl" x="632" y="408">Review &amp; sign</text>
+  <text class="sub" x="632" y="428">by the signatory</text>
+
+  <rect class="cardE" x="768" y="382" width="130" height="64" rx="11"/>
+  <text class="ttl" x="780" y="408">Counter-signed</text>
+  <text class="sub" x="780" y="428">by the organisation</text>
+
+  <!-- per-signatory brace -->
+  <path class="brace" d="M324 480 V488 H898 V480"/>
+  <path class="brace" d="M611 488 V496"/>
+  <text class="noteB" x="611" y="516" text-anchor="middle">Repeated for every signatory</text>
+  <text class="note" x="611" y="534" text-anchor="middle">sessions run independently, in any order; a failed session can be restarted by the consumer</text>
+
+  <!-- outcome rule -->
+  <text class="note" x="550" y="572" text-anchor="middle"><tspan class="okT">Completed</tspan> only when every signatory has signed · <tspan class="endT">Failed</tspan> on any refusal or final failure · cancelled by the consumer or after five days</text>
+</svg>

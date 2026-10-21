@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 620" width="1100" height="620" role="img" aria-labelledby="title desc">
+  <title id="title">System context</title>
+  <desc id="desc">Consuming services call the multi-party signing service over a REST API and answer its callbacks. The service drives the external signing platform, which the signatories use to verify their identity and sign, and which reports progress back by webhook. Around them sit the identity provider, the notification service that e-mails invitations, and the observability backend.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2f4f8"/>
+      <stop offset="1" stop-color="#e6eaf1"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.45" r="0.5">
+      <stop offset="0" stop-color="#4f6bff" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#4f6bff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ours" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5f7ff"/>
+      <stop offset="1" stop-color="#eaefff"/>
+    </linearGradient>
+    <linearGradient id="oursStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4f6bff"/>
+      <stop offset="1" stop-color="#9b5cff"/>
+    </linearGradient>
+    <linearGradient id="ext" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#fbfcfe"/>
+    </linearGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#0f172a" fill-opacity="0.08"/>
+    </pattern>
+    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <marker id="aAccent" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6d84ff"/>
+    </marker>
+    <marker id="aMuted" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a7b2c6"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-25%" width="120%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#1e293b" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      text { font-family: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+      .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2.2px; fill: #4f6bff; }
+      .h1      { font-size: 21px; font-weight: 600; fill: #0f172a; }
+      .ttl     { font-size: 14px; font-weight: 600; fill: #111827; }
+      .ttlL    { font-size: 16px; font-weight: 600; fill: #0b1020; }
+      .sub     { font-size: 11.5px; fill: #64748b; }
+      .subO    { font-size: 11.5px; fill: #4a58b8; }
+      .pill    { font-size: 11px; fill: #475569; }
+      .chip    { font-size: 11px; font-weight: 500; fill: #3546b3; }
+      .legend  { font-size: 11.5px; fill: #64748b; }
+      .cardO   { fill: url(#ours); stroke: url(#oursStroke); stroke-width: 1.5; filter: url(#shadow); }
+      .cardE   { fill: url(#ext); stroke: #dde3ee; stroke-width: 1.2; filter: url(#shadow); }
+      .glowO   { fill: none; stroke: #6d8dff; stroke-width: 6; stroke-opacity: 0.22; }
+      .tileO   { fill: #4f6bff; fill-opacity: 0.12; }
+      .tileE   { fill: #0f172a; fill-opacity: 0.05; }
+      .icO     { fill: none; stroke: #4f6bff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .icE     { fill: none; stroke: #64748b; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .lnO     { fill: none; stroke: #6d84ff; stroke-width: 1.8; }
+      .lnE     { fill: none; stroke: #a7b2c6; stroke-width: 1.5; }
+      .pillBg  { fill: #ffffff; stroke: #d6dce8; stroke-width: 1; }
+      .chipBg  { fill: #4f6bff; fill-opacity: 0.08; stroke: #4f6bff; stroke-opacity: 0.35; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1100" height="620" rx="22" fill="url(#bg)"/>
+  <rect width="1100" height="620" rx="22" fill="url(#dots)"/>
+  <ellipse cx="530" cy="330" rx="420" ry="260" fill="url(#halo)"/>
+
+  <!-- Header -->
+  <text class="eyebrow" x="44" y="48">SYSTEM CONTEXT</text>
+  <text class="h1" x="44" y="76">Multi-party signing between consumers and the signing platform</text>
+  <circle cx="842" cy="56" r="5" fill="url(#oursStroke)"/>
+  <text class="legend" x="854" y="60">built in this project</text>
+  <circle cx="985" cy="56" r="5" fill="#c3ccdb"/>
+  <text class="legend" x="997" y="60">external</text>
+
+  <!-- ===== Connectors ===== -->
+  <!-- consumers -> service -->
+  <path class="lnO" d="M480 178 V282" marker-end="url(#aAccent)"/>
+  <rect class="pillBg" x="420" y="200" width="120" height="22" rx="11"/>
+  <text class="pill" x="480" y="215" text-anchor="middle">REST API · OAuth</text>
+  <!-- service -> consumers -->
+  <path class="lnO" d="M580 286 V182" marker-end="url(#aAccent)"/>
+  <rect class="pillBg" x="530" y="238" width="100" height="22" rx="11"/>
+  <text class="pill" x="580" y="253" text-anchor="middle">callbacks</text>
+
+  <!-- IdP <-> service -->
+  <path class="lnE" d="M254 345 H346" marker-start="url(#aMuted)" marker-end="url(#aMuted)"/>
+  <rect class="pillBg" x="262" y="334" width="76" height="22" rx="11"/>
+  <text class="pill" x="300" y="349" text-anchor="middle">OAuth / OIDC</text>
+
+  <!-- service -> platform -->
+  <path class="lnO" d="M714 326 H826" marker-end="url(#aAccent)"/>
+  <rect class="pillBg" x="722" y="315" width="96" height="22" rx="11"/>
+  <text class="pill" x="770" y="330" text-anchor="middle">drives sessions</text>
+  <!-- platform -> service -->
+  <path class="lnE" d="M826 368 H718" marker-end="url(#aMuted)"/>
+  <rect class="pillBg" x="736" y="357" width="68" height="22" rx="11"/>
+  <text class="pill" x="770" y="372" text-anchor="middle">webhooks</text>
+
+  <!-- signatories <-> platform -->
+  <path class="lnE" d="M945 198 V296" marker-start="url(#aMuted)" marker-end="url(#aMuted)"/>
+  <rect class="pillBg" x="895" y="236" width="100" height="22" rx="11"/>
+  <text class="pill" x="945" y="251" text-anchor="middle">verify ID · sign</text>
+
+  <!-- service -> observability -->
+  <path class="lnE" d="M420 404 V512 H254" marker-end="url(#aMuted)"/>
+  <rect class="pillBg" x="272" y="501" width="132" height="22" rx="11"/>
+  <text class="pill" x="338" y="516" text-anchor="middle">traces · metrics · logs</text>
+
+  <!-- service -> notification -->
+  <path class="lnE" d="M640 404 V516" marker-end="url(#aMuted)"/>
+  <rect class="pillBg" x="600" y="448" width="80" height="22" rx="11"/>
+  <text class="pill" x="640" y="463" text-anchor="middle">invitations</text>
+
+  <!-- ===== External: consuming services (stacked) ===== -->
+  <rect class="cardE" x="390" y="102" width="300" height="64" rx="12" transform="translate(10 -8)" opacity="0.7"/>
+  <rect class="cardE" x="390" y="110" width="300" height="64" rx="12"/>
+  <rect class="tileE" x="404" y="126" width="32" height="32" rx="8"/>
+  <g transform="translate(412 134)">
+    <rect class="icE" x="1" y="5" width="10" height="10" rx="1.5"/>
+    <path class="icE" d="M5 5 V1 H15 V11 H11"/>
+  </g>
+  <text class="ttl" x="448" y="137">Consuming services</text>
+  <text class="sub" x="448" y="156">business flows that need signatures</text>
+
+  <!-- ===== Built in this project: the service ===== -->
+  <rect class="glowO" x="350" y="290" width="364" height="110" rx="14" filter="url(#glow)"/>
+  <rect class="cardO" x="350" y="290" width="364" height="110" rx="14"/>
+  <rect class="tileO" x="366" y="306" width="34" height="34" rx="9"/>
+  <g transform="translate(375 315)">
+    <path class="icO" d="M2 14 L3 10.5 L11 2.5 L13.5 5 L5.5 13 Z"/>
+    <path class="icO" d="M9.5 4 L12 6.5"/>
+  </g>
+  <text class="ttlL" x="412" y="320">Multi-party signing service</text>
+  <text class="subO" x="412" y="338">one process · many signatories · all or nothing</text>
+  <rect class="chipBg" x="366" y="360" width="70" height="22" rx="11"/>
+  <text class="chip" x="401" y="375" text-anchor="middle">WebApi</text>
+  <rect class="chipBg" x="444" y="360" width="120" height="22" rx="11"/>
+  <text class="chip" x="504" y="375" text-anchor="middle">Webhook receiver</text>
+  <rect class="chipBg" x="572" y="360" width="128" height="22" rx="11"/>
+  <text class="chip" x="636" y="375" text-anchor="middle">Command processor</text>
+
+  <!-- ===== External systems ===== -->
+  <!-- Identity provider -->
+  <rect class="cardE" x="40" y="313" width="210" height="64" rx="12"/>
+  <rect class="tileE" x="54" y="329" width="32" height="32" rx="8"/>
+  <g transform="translate(62 337)">
+    <path class="icE" d="M8 1 L14 3.5 V8 C14 11.5 11 14 8 15 C5 14 2 11.5 2 8 V3.5 Z"/>
+    <path class="icE" d="M5.5 8 L7.3 9.8 L10.8 6.3"/>
+  </g>
+  <text class="ttl" x="98" y="340">Identity provider</text>
+  <text class="sub" x="98" y="359">tokens · roles</text>
+
+  <!-- Observability -->
+  <rect class="cardE" x="40" y="480" width="210" height="64" rx="12"/>
+  <rect class="tileE" x="54" y="496" width="32" height="32" rx="8"/>
+  <g transform="translate(62 504)">
+    <path class="icE" d="M1 8 H4 L6 3 L9 13 L11 8 H15"/>
+  </g>
+  <text class="ttl" x="98" y="507">Honeycomb</text>
+  <text class="sub" x="98" y="526">traces · dashboards · SLOs</text>
+
+  <!-- Signatories -->
+  <rect class="cardE" x="830" y="130" width="230" height="64" rx="12"/>
+  <rect class="tileE" x="844" y="146" width="32" height="32" rx="8"/>
+  <g transform="translate(852 154)">
+    <circle class="icE" cx="8" cy="5" r="3"/>
+    <path class="icE" d="M2 15 C2 11 4.7 9.5 8 9.5 C11.3 9.5 14 11 14 15"/>
+  </g>
+  <text class="ttl" x="888" y="157">Signatories</text>
+  <text class="sub" x="888" y="176">customers signing documents</text>
+
+  <!-- Signing platform -->
+  <rect class="cardE" x="830" y="300" width="230" height="84" rx="12"/>
+  <rect class="tileE" x="844" y="316" width="32" height="32" rx="8"/>
+  <g transform="translate(852 324)">
+    <path class="icE" d="M3 1 H10 L13 4 V15 H3 Z"/>
+    <path class="icE" d="M5.5 11 C7 9 8 12.5 10.5 10"/>
+  </g>
+  <text class="ttl" x="888" y="327">External signing platform</text>
+  <text class="sub" x="888" y="346">single-signatory sessions</text>
+  <text class="sub" x="888" y="364">ID check · signing UI · signatures</text>
+
+  <!-- Notification service -->
+  <rect class="cardE" x="530" y="520" width="230" height="64" rx="12"/>
+  <rect class="tileE" x="544" y="536" width="32" height="32" rx="8"/>
+  <g transform="translate(552 544)">
+    <rect class="icE" x="1" y="3" width="14" height="10" rx="1.5"/>
+    <path class="icE" d="M1.5 4 L8 9 L14.5 4"/>
+  </g>
+  <text class="ttl" x="588" y="547">Notification service</text>
+  <text class="sub" x="588" y="566">e-mails to signatories</text>
+</svg>

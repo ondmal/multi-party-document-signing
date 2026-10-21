@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 470" width="1100" height="470" role="img" aria-labelledby="title desc">
+  <title id="title">Scaling model</title>
+  <desc id="desc">Within one signing process, each session is a sequential chain of steps that follows the signatory, and the process runs one command at a time. Many processes are independent and run in parallel. So the process id is the partition key: commands are partitioned by process id, with one worker per partition.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2f4f8"/>
+      <stop offset="1" stop-color="#e6eaf1"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4f6bff" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#4f6bff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ours" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5f7ff"/>
+      <stop offset="1" stop-color="#eaefff"/>
+    </linearGradient>
+    <linearGradient id="oursStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4f6bff"/>
+      <stop offset="1" stop-color="#9b5cff"/>
+    </linearGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#0f172a" fill-opacity="0.08"/>
+    </pattern>
+    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <filter id="shadow" x="-10%" y="-25%" width="120%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#1e293b" flood-opacity="0.08"/>
+    </filter>
+    <marker id="aAccent" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6d84ff"/>
+    </marker>
+    <marker id="aMuted" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a7b2c6"/>
+    </marker>
+    <style>
+      text { font-family: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+      .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2.2px; fill: #4f6bff; }
+      .eyebrowS{ font-size: 10.5px; font-weight: 700; letter-spacing: 1.8px; fill: #7c8aa5; }
+      .h1      { font-size: 21px; font-weight: 600; fill: #0f172a; }
+      .ttl     { font-size: 14px; font-weight: 600; fill: #111827; }
+      .sub     { font-size: 11.5px; fill: #64748b; }
+      .subO    { font-size: 11.5px; fill: #4a58b8; }
+      .pill    { font-size: 11px; fill: #475569; }
+      .step    { font-size: 11px; font-weight: 500; fill: #334155; }
+      .note    { font-size: 12px; fill: #475569; }
+      .legend  { font-size: 11.5px; fill: #64748b; }
+      .panel   { fill: #ffffff; fill-opacity: 0.5; stroke: #dfe4ef; stroke-width: 1; }
+      .cardO   { fill: url(#ours); stroke: url(#oursStroke); stroke-width: 1.5; filter: url(#shadow); }
+      .glowO   { fill: none; stroke: #6d8dff; stroke-width: 6; stroke-opacity: 0.20; }
+      .stepBg  { fill: #ffffff; stroke: #c3cdfa; stroke-width: 1.2; }
+      .keyBg   { fill: #4f6bff; fill-opacity: 0.08; stroke: #4f6bff; stroke-opacity: 0.35; stroke-width: 1; }
+      .keyT    { font-size: 11px; font-weight: 600; fill: #3546b3; }
+      .lnO     { fill: none; stroke: #6d84ff; stroke-width: 1.8; }
+      .lnE     { fill: none; stroke: #a7b2c6; stroke-width: 1.5; }
+      .pillBg  { fill: #ffffff; stroke: #d6dce8; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1100" height="470" rx="22" fill="url(#bg)"/>
+  <rect width="1100" height="470" rx="22" fill="url(#dots)"/>
+  <ellipse cx="550" cy="250" rx="480" ry="190" fill="url(#halo)"/>
+
+  <!-- Header -->
+  <text class="eyebrow" x="44" y="44">SCALING MODEL</text>
+  <text class="h1" x="44" y="72">Sequential within a process, parallel across processes</text>
+  <circle cx="932" cy="52" r="5" fill="url(#oursStroke)"/>
+  <text class="legend" x="944" y="56">this system</text>
+
+  <!-- ===== One process ===== -->
+  <rect class="panel" x="56" y="104" width="420" height="300" rx="16"/>
+  <text class="eyebrowS" x="76" y="128">ONE PROCESS</text>
+
+  <rect class="glowO" x="76" y="142" width="380" height="246" rx="14" filter="url(#glow)"/>
+  <rect class="cardO" x="76" y="142" width="380" height="246" rx="14"/>
+  <text class="ttl" x="92" y="166">Signing process</text>
+  <text class="subO" x="92" y="184">one command at a time</text>
+
+  <!-- session rows -->
+  <text class="sub" x="92" y="220">Session A</text>
+  <rect class="stepBg" x="168" y="202" width="82" height="28" rx="8"/>
+  <text class="step" x="209" y="220" text-anchor="middle">opened</text>
+  <path class="lnO" d="M250 216 H258" marker-end="url(#aAccent)"/>
+  <rect class="stepBg" x="262" y="202" width="82" height="28" rx="8"/>
+  <text class="step" x="303" y="220" text-anchor="middle">identified</text>
+  <path class="lnO" d="M344 216 H352" marker-end="url(#aAccent)"/>
+  <rect class="stepBg" x="356" y="202" width="82" height="28" rx="8"/>
+  <text class="step" x="397" y="220" text-anchor="middle">signed</text>
+
+  <text class="sub" x="92" y="270">Session B</text>
+  <rect class="stepBg" x="168" y="252" width="82" height="28" rx="8"/>
+  <text class="step" x="209" y="270" text-anchor="middle">opened</text>
+  <path class="lnO" d="M250 266 H258" marker-end="url(#aAccent)"/>
+  <rect class="stepBg" x="262" y="252" width="82" height="28" rx="8"/>
+  <text class="step" x="303" y="270" text-anchor="middle">identified</text>
+  <path class="lnO" d="M344 266 H352" marker-end="url(#aAccent)"/>
+  <rect class="stepBg" x="356" y="252" width="82" height="28" rx="8"/>
+  <text class="step" x="397" y="270" text-anchor="middle">signed</text>
+
+  <text class="sub" x="92" y="320">Session C</text>
+  <rect class="stepBg" x="168" y="302" width="82" height="28" rx="8"/>
+  <text class="step" x="209" y="320" text-anchor="middle">opened</text>
+  <path class="lnO" d="M250 316 H258" marker-end="url(#aAccent)"/>
+  <rect class="stepBg" x="262" y="302" width="82" height="28" rx="8"/>
+  <text class="step" x="303" y="320" text-anchor="middle">identified</text>
+  <path class="lnO" d="M344 316 H352" marker-end="url(#aAccent)"/>
+  <rect class="stepBg" x="356" y="302" width="82" height="28" rx="8"/>
+  <text class="step" x="397" y="320" text-anchor="middle">signed</text>
+
+  <rect class="pillBg" x="160" y="352" width="214" height="22" rx="11"/>
+  <text class="pill" x="267" y="367" text-anchor="middle">sequential · follows the signatory</text>
+
+  <!-- × many -->
+  <path class="lnO" d="M460 265 H510" marker-end="url(#aAccent)"/>
+  <rect class="pillBg" x="458" y="236" width="56" height="20" rx="10"/>
+  <text class="pill" x="486" y="250" text-anchor="middle">× many</text>
+
+  <!-- ===== Many processes ===== -->
+  <text class="eyebrowS" x="516" y="128">MANY PROCESSES</text>
+
+  <rect class="cardO" x="516" y="150" width="190" height="50" rx="12"/>
+  <text class="ttl" x="532" y="172">Process 1</text>
+  <text class="subO" x="532" y="190">independent</text>
+
+  <rect class="cardO" x="516" y="215" width="190" height="50" rx="12"/>
+  <text class="ttl" x="532" y="237">Process 2</text>
+  <text class="subO" x="532" y="255">independent</text>
+
+  <rect class="cardO" x="516" y="280" width="190" height="50" rx="12"/>
+  <text class="ttl" x="532" y="302">Process n</text>
+  <text class="subO" x="532" y="320">independent</text>
+
+  <rect class="pillBg" x="556" y="352" width="110" height="22" rx="11"/>
+  <text class="pill" x="611" y="367" text-anchor="middle">run in parallel</text>
+
+  <!-- ===== Queue & workers ===== -->
+  <text class="eyebrowS" x="746" y="128">QUEUE &amp; WORKERS</text>
+
+  <path class="lnO" d="M706 175 H742" marker-end="url(#aAccent)"/>
+  <rect class="keyBg" x="746" y="158" width="116" height="34" rx="10"/>
+  <text class="keyT" x="804" y="172" text-anchor="middle">partition</text>
+  <text class="pill" x="804" y="186" text-anchor="middle">by process id</text>
+  <path class="lnO" d="M862 175 H890" marker-end="url(#aAccent)"/>
+  <rect class="cardO" x="894" y="150" width="150" height="50" rx="12"/>
+  <text class="ttl" x="910" y="172">Worker 1</text>
+  <text class="subO" x="910" y="190">Azure Functions</text>
+
+  <path class="lnO" d="M706 240 H742" marker-end="url(#aAccent)"/>
+  <rect class="keyBg" x="746" y="223" width="116" height="34" rx="10"/>
+  <text class="keyT" x="804" y="237" text-anchor="middle">partition</text>
+  <text class="pill" x="804" y="251" text-anchor="middle">by process id</text>
+  <path class="lnO" d="M862 240 H890" marker-end="url(#aAccent)"/>
+  <rect class="cardO" x="894" y="215" width="150" height="50" rx="12"/>
+  <text class="ttl" x="910" y="237">Worker 2</text>
+  <text class="subO" x="910" y="255">Azure Functions</text>
+
+  <path class="lnO" d="M706 305 H742" marker-end="url(#aAccent)"/>
+  <rect class="keyBg" x="746" y="288" width="116" height="34" rx="10"/>
+  <text class="keyT" x="804" y="302" text-anchor="middle">partition</text>
+  <text class="pill" x="804" y="316" text-anchor="middle">by process id</text>
+  <path class="lnO" d="M862 305 H890" marker-end="url(#aAccent)"/>
+  <rect class="cardO" x="894" y="280" width="150" height="50" rx="12"/>
+  <text class="ttl" x="910" y="302">Worker n</text>
+  <text class="subO" x="910" y="320">Azure Functions</text>
+
+  <rect class="pillBg" x="790" y="352" width="200" height="22" rx="11"/>
+  <text class="pill" x="890" y="367" text-anchor="middle">the process is the partition key</text>
+
+  <!-- Footer -->
+  <text class="note" x="550" y="440" text-anchor="middle">A session is sequential by nature · a process serialises its sessions' commands · processes are independent — so the process id partitions the queue, the workers and, if ever needed, the data.</text>
+</svg>
