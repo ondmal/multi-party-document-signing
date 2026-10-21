@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 950" width="1100" height="950" role="img" aria-labelledby="title desc">
   <title id="title">Component view</title>
-  <desc id="desc">The external signing platform calls the webhook receiver, which forwards to the WebApi host; consuming services call the WebApi host. The WebApi host and the command-processor host share one Clean Architecture core: Infrastructure wraps Application, which wraps the Domain with the signing process, its sessions and rules. The service depends on PostgreSQL, Blob Storage, a Storage Queue and the external systems.</desc>
+  <desc id="desc">The external signing platform calls the webhook receiver, which forwards to the WebApi host; consuming services call the WebApi host, and the command-processor host calls the consuming services back. The WebApi host and the command-processor host share one Clean Architecture core: Infrastructure wraps Application, which wraps the Domain with the signing process, its sessions and rules. The service depends on PostgreSQL, Blob Storage, a Storage Queue and the external systems.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#f2f4f8"/>
@@ -93,6 +93,10 @@
   <rect class="pillBg" x="492" y="276" width="116" height="22" rx="11"/>
   <text class="pill" x="550" y="291" text-anchor="middle">REST API · internal</text>
 
+  <path class="lnO" d="M840 432 V142 H684" marker-end="url(#aAccent)"/>
+  <rect class="pillBg" x="779" y="276" width="122" height="22" rx="11"/>
+  <text class="pill" x="840" y="291" text-anchor="middle">callbacks · internal</text>
+
   <path class="lnO" d="M380 464 H426" marker-end="url(#aAccent)"/>
 
   <path class="lnO" d="M550 496 V522 H840 V496"/>
@@ -133,8 +137,8 @@
 
   <!-- ===== Service frame ===== -->
   <rect class="frame" x="90" y="396" width="920" height="394" rx="18"/>
-  <rect class="tagBg" x="770" y="383" width="220" height="26" rx="13"/>
-  <text class="tag" x="880" y="400" text-anchor="middle">Multi-party signing service</text>
+  <rect class="tagBg" x="590" y="383" width="220" height="26" rx="13"/>
+  <text class="tag" x="700" y="400" text-anchor="middle">Multi-party signing service</text>
 
   <!-- Hosts -->
   <rect class="cardO" x="140" y="432" width="240" height="64" rx="12"/>
