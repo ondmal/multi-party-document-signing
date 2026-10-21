@@ -11,6 +11,8 @@ signs**. In production, used by two consuming services.
 **Role:** solution architect and senior developer — designed the whole system
 and implemented the most critical parts of it.
 
+**Built:** 2025–2026.
+
 **System of record for the *multi-signatory process* — not for the single
 session, and not for the signed documents.** The signing platform owns each
 **signing session** — one signatory, their identity verification, their
