@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" width="1100" height="600" role="img" aria-labelledby="title desc">
   <title id="title">Signing process</title>
-  <desc id="desc">Three lanes: consuming service, signing service, signing platform. The consumer creates a process and gets its id. The service starts one session per signatory on the platform, which sends the invitation. The signatory verifies their ID on the platform; the service asks the consumer whether the identity matches while the signatory waits, then asks the consumer for the documents, also while the signatory waits, and sends them to the platform. The signatory reviews and signs, the platform adds the organisation's counter-signature, and the service keeps the signed documents. The process completes only when every signatory has signed and fails as a whole otherwise; the consumer is notified and collects the documents.</desc>
+  <desc id="desc">Three lanes: consuming service, signing service, signing platform. The consumer creates a process and gets its id. The service starts one session per signatory on the platform, which sends the invitation. The signatory verifies their ID on the platform; the service asks the consumer whether the identity matches while the signatory waits, then asks the consumer for the documents, also while the signatory waits, and sends them to the platform. The signatory reviews and signs, the platform adds the organisation's counter-signature, and the service keeps the signed documents. Each session ends completed or failed; a failed session can be restarted by the consumer as a new platform session for that signatory. The process ends with all sessions completed, or failed as a whole with no restart. The consumer is notified and collects the documents.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#f2f4f8"/>
@@ -37,6 +37,9 @@
     <marker id="aMuted" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#a7b2c6"/>
     </marker>
+    <marker id="aWarn" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d97706"/>
+    </marker>
     <style>
       text { font-family: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
       .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2.2px; fill: #4f6bff; }
@@ -52,17 +55,22 @@
       .legend  { font-size: 11.5px; fill: #64748b; }
       .okT     { font-size: 12.5px; font-weight: 600; fill: #15803d; }
       .endT    { font-size: 12.5px; font-weight: 600; fill: #b42318; }
+      .warnT   { font-size: 12.5px; font-weight: 600; fill: #b45309; }
+      .warnS   { font-size: 11px; fill: #b45309; }
       .panel   { fill: #ffffff; fill-opacity: 0.5; stroke: #dfe4ef; stroke-width: 1; }
       .panelO  { fill: #4f6bff; fill-opacity: 0.04; stroke: #c3cdfa; stroke-width: 1; }
       .cardO   { fill: url(#ours); stroke: url(#oursStroke); stroke-width: 1.5; filter: url(#shadow); }
       .cardE   { fill: url(#ext); stroke: #cfd6e3; stroke-width: 1.2; filter: url(#shadow); }
       .cardOk  { fill: #f0fdf4; stroke: #4ade80; stroke-width: 1.4; filter: url(#shadow); }
       .cardEnd { fill: #fef3f2; stroke: #f59ea0; stroke-width: 1.4; filter: url(#shadow); }
+      .cardWarn{ fill: #fffbeb; stroke: #fbbf24; stroke-width: 1.4; filter: url(#shadow); }
       .icOk    { fill: none; stroke: #16a34a; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
       .icEnd   { fill: none; stroke: #e5484d; stroke-width: 1.8; stroke-linecap: round; }
+      .icWarn  { fill: none; stroke: #d97706; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
       .icW     { fill: none; stroke: #d97706; stroke-width: 1.5; stroke-linecap: round; }
       .lnO     { fill: none; stroke: #6d84ff; stroke-width: 1.8; }
       .lnE     { fill: none; stroke: #a7b2c6; stroke-width: 1.5; }
+      .lnWarn  { fill: none; stroke: #d97706; stroke-width: 1.5; stroke-dasharray: 5 4; }
       .brace   { fill: none; stroke: #9aa9ff; stroke-width: 1.4; }
     </style>
   </defs>
@@ -105,16 +113,19 @@
   <path class="lnE" d="M670 382 V330" marker-end="url(#aMuted)"/>
   <path class="lnO" d="M700 326 V376" marker-end="url(#aAccent)"/>
   <path class="lnE" d="M833 382 V330" marker-end="url(#aMuted)"/>
-  <path class="lnO" d="M981 246 V194" marker-end="url(#aAccent)"/>
+  <path class="lnE" d="M980 382 V330" marker-end="url(#aMuted)"/>
+  <path class="lnO" d="M980 246 V194" marker-end="url(#aAccent)"/>
 
   <!-- ===== Service lane: creation starts the sessions; reactions in between; outcome at the end ===== -->
   <path class="lnO" d="M306 286 H320" marker-end="url(#aAccent)"/>
-  <path class="lnO" d="M898 286 H912" marker-end="url(#aAccent)"/>
+  <path class="lnO" d="M898 286 H904" marker-end="url(#aAccent)"/>
 
-  <!-- ===== Platform lane: the session is the sequential path ===== -->
+  <!-- ===== Platform lane: the session is the sequential path; a failed session restarts as a new one ===== -->
   <path class="lnE" d="M454 414 H468" marker-end="url(#aMuted)"/>
   <path class="lnE" d="M602 414 H616" marker-end="url(#aMuted)"/>
   <path class="lnE" d="M750 414 H764" marker-end="url(#aMuted)"/>
+  <path class="lnE" d="M898 414 H904" marker-end="url(#aMuted)"/>
+  <path class="lnWarn" d="M980 450 V459 H389 V450" marker-end="url(#aWarn)"/>
 
   <!-- ===== Consumer lane ===== -->
   <rect class="cardE" x="176" y="126" width="130" height="64" rx="11"/>
@@ -131,9 +142,9 @@
   <g transform="translate(632 162)"><circle class="icW" cx="6" cy="6" r="5.5"/><path class="icW" d="M6 3 V6 L8 7.5"/></g>
   <text class="wait" x="648" y="172">with ID data</text>
 
-  <rect class="cardE" x="916" y="126" width="130" height="64" rx="11"/>
-  <text class="ttl" x="928" y="152">Collect PDFs</text>
-  <text class="sub" x="928" y="172">notified of status</text>
+  <rect class="cardE" x="908" y="126" width="144" height="64" rx="11"/>
+  <text class="ttl" x="920" y="152">Collect PDFs</text>
+  <text class="sub" x="920" y="172">notified of status</text>
 
   <!-- ===== Service lane ===== -->
   <rect class="cardO" x="176" y="246" width="130" height="80" rx="12"/>
@@ -157,13 +168,16 @@
   <text class="ttl" x="780" y="276">Keep signed PDFs</text>
   <text class="subO" x="780" y="296">until collected</text>
 
-  <!-- outcome -->
-  <rect class="cardOk" x="916" y="246" width="130" height="36" rx="10"/>
-  <path class="icOk" d="M928 264 L933 269 L942 259"/>
-  <text class="okT" x="950" y="269">Completed</text>
-  <rect class="cardEnd" x="916" y="290" width="130" height="36" rx="10"/>
-  <path class="icEnd" d="M929 303 L939 313 M939 303 L929 313"/>
-  <text class="endT" x="950" y="313">Failed</text>
+  <!-- process outcomes -->
+  <rect class="cardOk" x="908" y="246" width="144" height="36" rx="10"/>
+  <path class="icOk" d="M920 264 L925 269 L934 259"/>
+  <text class="okT" x="942" y="262">All sessions</text>
+  <text class="okT" x="942" y="276">completed</text>
+
+  <rect class="cardEnd" x="908" y="290" width="144" height="36" rx="10"/>
+  <path class="icEnd" d="M922 303 L932 313 M932 303 L922 313"/>
+  <text class="endT" x="942" y="306">Process failed</text>
+  <text class="endT" x="942" y="320">no restart</text>
 
   <!-- ===== Platform lane ===== -->
   <rect class="cardE" x="324" y="382" width="130" height="64" rx="11"/>
@@ -182,12 +196,22 @@
   <text class="ttl" x="780" y="408">Counter-signed</text>
   <text class="sub" x="780" y="428">by the organisation</text>
 
+  <!-- session outcomes -->
+  <rect class="cardOk" x="908" y="382" width="144" height="30" rx="10"/>
+  <path class="icOk" d="M920 397 L925 402 L934 392"/>
+  <text class="okT" x="942" y="401">Session completed</text>
+
+  <rect class="cardWarn" x="908" y="418" width="144" height="32" rx="10"/>
+  <path class="icWarn" d="M922 434 A5.5 5.5 0 1 1 923.6 437.9 M920.6 435.4 L923.6 437.9 L926.4 435.9"/>
+  <text class="warnT" x="942" y="432">Session failed</text>
+  <text class="warnS" x="942" y="445">restart = new session</text>
+
   <!-- per-signatory brace -->
-  <path class="brace" d="M324 480 V488 H898 V480"/>
-  <path class="brace" d="M611 488 V496"/>
-  <text class="noteB" x="611" y="516" text-anchor="middle">Repeated for every signatory</text>
-  <text class="note" x="611" y="534" text-anchor="middle">sessions run independently, in any order; a failed session can be restarted by the consumer</text>
+  <path class="brace" d="M324 480 V488 H1052 V480"/>
+  <path class="brace" d="M688 488 V496"/>
+  <text class="noteB" x="688" y="516" text-anchor="middle">Repeated for every signatory</text>
+  <text class="note" x="688" y="534" text-anchor="middle">sessions run independently, in any order; the consumer restarts a failed session as a new platform session for that signatory</text>
 
   <!-- outcome rule -->
-  <text class="note" x="550" y="572" text-anchor="middle"><tspan class="okT">Completed</tspan> only when every signatory has signed · <tspan class="endT">Failed</tspan> on any refusal or final failure · cancelled by the consumer or after five days</text>
+  <text class="note" x="550" y="572" text-anchor="middle"><tspan class="okT">All sessions completed</tspan> only when every signatory has signed · <tspan class="endT">Process failed</tspan> on a final session failure, cancellation or after five days</text>
 </svg>
