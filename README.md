@@ -254,9 +254,11 @@ service calls all consumers the same way.
 - **Two answers only the consumer can give.** When the platform has verified a
   signatory's ID, the service asks the consumer whether the identity matches its
   customer, and passes the verdict back to the platform. Once confirmed, it asks
-  the consumer for the documents to sign, verifies their integrity hashes, and
-  hands them to the platform — both while the signatory waits (see *Design
-  decisions*). The platform then has the signatory sign, adds the
+  the consumer for the documents to sign — PDFs with empty signature fields,
+  typically rendered by the
+  [Document Template Rendering Service](https://ondmal.github.io/document-template-rendering/) —
+  verifies their integrity hashes, and hands them to the platform — both while
+  the signatory waits (see *Design decisions*). The platform then has the signatory sign, adds the
   organisation's counter-signature, and the service downloads the signed
   documents and keeps them.
 
