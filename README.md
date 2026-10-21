@@ -24,8 +24,10 @@ consumer collects them.
 ## The problem
 
 Several business flows need documents — contracts, typically — signed digitally
-by **more than one party**, with the signatory's identity verified against an ID
-document and the result legally valid. An **external signing platform** was the
+by **more than one party** with an **Advanced Electronic Signature (AES)** under
+eIDAS: the signatory's identity verified against an ID document, the signature
+uniquely linked to that person, and the result legally valid. An **external
+signing platform** was the
 given precondition: it provides the signatory's user interface, the identity
 verification and the cryptographic signing, including the organisation's
 counter-signature. But it works with **one signatory per session**, and it knows
