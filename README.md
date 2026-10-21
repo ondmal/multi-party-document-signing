@@ -11,12 +11,13 @@ signs**. In production, used by two consuming services.
 **Role:** solution architect and senior developer — designed the whole system
 and implemented the most critical parts of it.
 
-**System of record for the *multi-signatory process*, not the single session.**
-The signing platform owns each **signing session** — one signatory, their
-identity verification, their signature. The service owns the **process** above
-those sessions — which signatories, which documents, the all-or-nothing
-outcome — and holds the signed documents only until the consumer, their owner,
-collects them.
+**System of record for the *multi-signatory process* — not for the single
+session, and not for the signed documents.** The signing platform owns each
+**signing session** — one signatory, their identity verification, their
+signature. The consumer owns the **documents**. The service owns only the
+**process** above those sessions — which signatories, which documents, the
+all-or-nothing outcome — and holds the signed documents just until the
+consumer collects them.
 
 ---
 
